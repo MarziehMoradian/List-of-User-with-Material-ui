@@ -1,0 +1,10 @@
+.form{
+    width:max-content;
+    display: flex;
+    justify-content:center;
+    margin: 10px;
+}
+.inputs div{
+    width:50rem;
+   
+}
