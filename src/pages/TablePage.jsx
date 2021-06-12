@@ -12,6 +12,7 @@ function TablePage() {
   /**
    * States
    */
+ 
   const [loading,setLoading]=useState(true);
   const [displayUser,setDisplayUser]=useState(false);
   const [user,setUser]=useState()
@@ -39,14 +40,7 @@ function TablePage() {
       toast.error("request failed!");
     }
   }
-  /**
-   * Handle Show Personal Information Of Users
-   */
-  // const handleUser=(userName)=>{
-  //   let filterUser=users.filter(user => user.id === userName);
-  //   setUser(filterUser);
-  //   setDisplayUser(true);
-  // }
+
 
   return (
     <div className="App" >

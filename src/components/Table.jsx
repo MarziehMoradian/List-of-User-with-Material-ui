@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Pagination from './Pagination';
+import TablePagination from '@material-ui/core/TablePagination';
 import Avatar from '@material-ui/core/Avatar';
 import './Table.css';
 import {useHistory} from 'react-router-dom';
@@ -47,6 +47,18 @@ const theme = {
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
 };
 export default function CustomizedTables({users,pageSize,onClick}) {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   let history=useHistory(); 
   const classes = useStyles();
  
@@ -66,7 +78,7 @@ export default function CustomizedTables({users,pageSize,onClick}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users.map((user) => (
+          {users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((user) => (
             
             <TableRow key={user.id} className={classes.table
             } >
@@ -82,12 +94,19 @@ export default function CustomizedTables({users,pageSize,onClick}) {
 
           ))}
         </TableBody>
-        
       </Table>
       </div>
     </TableContainer>
-    <Pagination />
-    
+    <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={users.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={handleChangePage}
+        onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+
     </div>
   );
 }
