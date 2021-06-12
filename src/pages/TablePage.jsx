@@ -1,12 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
 import Table from './../components/Table';
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import WithLoading from './../components/Loading';
-import User from './../components/User';
-import Notification from './../components/Notification';
 
 function TablePage() {
   /**
@@ -15,7 +11,6 @@ function TablePage() {
  
   const [loading,setLoading]=useState(true);
   const [displayUser,setDisplayUser]=useState(false);
-  const [user,setUser]=useState()
   const [users,setUsers]=useState([]);
   const ListWithLoading = WithLoading(Table);
 
@@ -32,20 +27,19 @@ function TablePage() {
 
   const fetchData = async () =>{
     try{
-      const res = await fetch('https://60b4f24cfe923b0017c833c3.mockapi.io/test');
+      const res = await fetch(`https://60b4f24cfe923b0017c833c3.mockapi.io/test`);
       const data = await res.json()
-      setLoading(false)
+      setLoading(false);
       return data;
     }catch(err){
-      toast.error("request failed!");
+      NotificationManager.error('request failed!')
     }
   }
 
 
   return (
     <div className="App" >
-
-      {/* {displayUser && <User displayUser={displayUser} users={user}/>} */}
+      <NotificationContainer/>
 
       <ListWithLoading isLoading={loading} users={users} displayUser={displayUser} />
  

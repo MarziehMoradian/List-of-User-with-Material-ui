@@ -36,7 +36,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 700,
+    minWidth: 425,
     '&:nth-of-type(even)':  {
     background: '#c3f5ea80',
   },
